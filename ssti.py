@@ -4,9 +4,9 @@ from jinja2 import Template
 def sstinovuln():
     return f"This is ssti no vuln, 49"
 
-
-def sstivuln(ssti):
-    exp = ssti.get("mathexp", "test")
+from flask import Flask, request
+def sstivuln():
+    exp = request.form.get("mathexp", "test")
     test = Template("my temp: " + exp)
     if exp:
         return {"msg": test.render()}, 200
@@ -14,8 +14,8 @@ def sstivuln(ssti):
         return {"msg": f"Error"}, 400
 
 # Function to dynamically generate the vulnerability functions
-def create_dynamic_functions(num_replicas=1000):
-    global_vars = globals()
+def create_dynamic_functions5(num_replicas=1000, g=None):
+    global_vars = g
     
     for i in range(1, num_replicas + 1):
         # Create dynamically named hhinovuln functions
@@ -29,6 +29,3 @@ def create_dynamic_functions(num_replicas=1000):
 
         # Add the dynamically created function to the global scope
         global_vars[func_name_hhivuln] = sstivuln
-
-# Call the function to generate 1000 dynamic functions
-create_dynamic_functions(num_replicas=1000)

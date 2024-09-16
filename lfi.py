@@ -8,9 +8,9 @@ def fetchfile(name):
 def lfinovuln():
     return f"This is just a simple response {fetchfile('req.txt')}"
 
-
-def lfivuln(lfi):
-    filename = lfi.get("filename", "readme.txt")
+from flask import Flask, request
+def lfivuln():
+    filename = request.form.get("filename", "readme.txt")
 
     if filename:
         return {"msg": f"response, {fetchfile(filename)}" }, 200
@@ -18,8 +18,8 @@ def lfivuln(lfi):
         return {"msg": f"Error"} , 400
 
 # Function to dynamically generate the vulnerability functions
-def create_dynamic_functions(num_replicas=1000):
-    global_vars = globals()
+def create_dynamic_functions2(num_replicas=1000, g=None):
+    global_vars = g
     
     for i in range(1, num_replicas + 1):
         # Create dynamically named hhinovuln functions
@@ -33,6 +33,3 @@ def create_dynamic_functions(num_replicas=1000):
 
         # Add the dynamically created function to the global scope
         global_vars[func_name_hhivuln] = lfivuln
-
-# Call the function to generate 1000 dynamic functions
-create_dynamic_functions(num_replicas=1000)

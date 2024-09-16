@@ -2,9 +2,9 @@
 def novuln():
     return "This is just a simple response"
 
-
-def reflected(xss):
-    username = xss.get("username", "noprovided")
+from flask import Flask, request
+def xssvuln():
+    username = request.form.get("username", "noprovided")
 
     if username:
         return {"msg": f"Hello, {username}"}, 200
@@ -12,8 +12,8 @@ def reflected(xss):
         return {"msg": f"Error"}, 400
 
 # Function to dynamically generate the vulnerability functions
-def create_dynamic_functions(num_replicas=1000):
-    global_vars = globals()
+def create_dynamic_functions6(num_replicas=1000, g=None):
+    global_vars = g
     
     for i in range(1, num_replicas + 1):
         # Create dynamically named hhinovuln functions
@@ -23,10 +23,7 @@ def create_dynamic_functions(num_replicas=1000):
         global_vars[func_name_hhinovuln] = novuln
 
         # Create dynamically named hhivuln functions
-        func_name_hhivuln = f"reflected_{i}"
+        func_name_hhivuln = f"xssvuln_{i}"
 
         # Add the dynamically created function to the global scope
-        global_vars[func_name_hhivuln] = reflected
-
-# Call the function to generate 1000 dynamic functions
-create_dynamic_functions(num_replicas=1000)
+        global_vars[func_name_hhivuln] = xssvuln

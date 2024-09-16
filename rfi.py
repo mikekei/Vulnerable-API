@@ -9,10 +9,9 @@ def fetchimage(name):
 
 def rfinovuln():
     return f"This is just a simple image"
-
-
-def rfivuln(rfi):
-    filename = rfi.get("imagelink", "http://google.com")
+from flask import Flask, request
+def rfivuln():
+    filename = request.form.get("imagelink", "http://google.com")
 
     if filename:
         return {"msg": f"response, {fetchimage(filename)}"}, 200
@@ -21,8 +20,8 @@ def rfivuln(rfi):
 
 
 # Function to dynamically generate the vulnerability functions
-def create_dynamic_functions(num_replicas=1000):
-    global_vars = globals()
+def create_dynamic_functions3(num_replicas=1000, g=None):
+    global_vars = g
     
     for i in range(1, num_replicas + 1):
         # Create dynamically named hhinovuln functions
@@ -36,6 +35,3 @@ def create_dynamic_functions(num_replicas=1000):
 
         # Add the dynamically created function to the global scope
         global_vars[func_name_hhivuln] = rfivuln
-
-# Call the function to generate 1000 dynamic functions
-create_dynamic_functions(num_replicas=1000)

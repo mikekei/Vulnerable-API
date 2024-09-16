@@ -5,10 +5,10 @@ conn = sqlite3.connect("vulns.db", check_same_thread=False)
 def sqlinovuln():
     return "This is just a simple response"
 
-
-def sqlivuln(sqli):
-    username = sqli.get("username", "noprovided")
-    password = sqli.get("password", "noprovided")
+from flask import Flask, request
+def sqlivuln():
+    username = request.form.get("username", "noprovided")
+    password = request.form.get("password", "noprovided")
 
     if username and password:
         cur = conn.cursor()
@@ -22,8 +22,8 @@ def sqlivuln(sqli):
         return {"msg": f"Error"}, 400
     
 # Function to dynamically generate the vulnerability functions
-def create_dynamic_functions(num_replicas=1000):
-    global_vars = globals()
+def create_dynamic_functions4(num_replicas=1000, g=None):
+    global_vars = g
     
     for i in range(1, num_replicas + 1):
         # Create dynamically named hhinovuln functions
@@ -37,6 +37,3 @@ def create_dynamic_functions(num_replicas=1000):
 
         # Add the dynamically created function to the global scope
         global_vars[func_name_hhivuln] = sqlivuln
-
-# Call the function to generate 1000 dynamic functions
-create_dynamic_functions(num_replicas=1000)

@@ -6,7 +6,7 @@ app = Flask(__name__)
 def hhinovuln():
     return "This is hhi no vuln"
 
-def hhivuln(hhi):
+def hhivuln():
     headerss = request.headers
     print(f"headers: {headerss}")
     
@@ -22,8 +22,8 @@ def hhivuln(hhi):
         return {"msg": "failed"}, 400
 
 # Function to dynamically generate the vulnerability functions
-def create_dynamic_functions(num_replicas=1000):
-    global_vars = globals()
+def create_dynamic_functions1(num_replicas=1000, g=None):
+    global_vars = g
     
     for i in range(1, num_replicas + 1):
         # Create dynamically named hhinovuln functions
@@ -38,5 +38,3 @@ def create_dynamic_functions(num_replicas=1000):
         # Add the dynamically created function to the global scope
         global_vars[func_name_hhivuln] = hhivuln
 
-# Call the function to generate 1000 dynamic functions
-create_dynamic_functions(num_replicas=1000)
