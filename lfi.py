@@ -13,7 +13,7 @@ def lfivuln():
     filename = request.form.get("filename", "readme.txt")
 
     if filename:
-        return {"msg": f"response, {fetchfile(filename)}" }, 200
+        return f"response, {fetchfile(filename)}", 200
     else:
         return {"msg": f"Error"} , 400
 

@@ -17,7 +17,7 @@ def hhivuln():
         h = "temo.com"
 
     if headerss:
-        return {"msg": f"response, <a href='{h}'>"}, 200
+        return f"response, <a href='{h}'>", 200
     else:
         return {"msg": "failed"}, 400
 

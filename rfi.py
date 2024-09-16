@@ -14,7 +14,7 @@ def rfivuln():
     filename = request.form.get("imagelink", "http://google.com")
 
     if filename:
-        return {"msg": f"response, {fetchimage(filename)}"}, 200
+        return f"response, {fetchimage(filename)}", 200
     else:
         return {"msg": f"Error"}, 400
 

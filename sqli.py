@@ -16,8 +16,8 @@ def sqlivuln():
             cur.execute(f"SELECT * FROM USERS WHERE USERNAME='{username}'")
             users = cur.fetchall()
         except Exception as e:
-            return {"msg": f"{e}"}, 200
-        return {"msg": f"Hello, {users}"}, 200
+            return f"{e}", 200
+        return f"Hello, {users}", 200
     else:
         return {"msg": f"Error"}, 400
     

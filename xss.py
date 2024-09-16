@@ -7,7 +7,7 @@ def xssvuln():
     username = request.form.get("username", "noprovided")
 
     if username:
-        return {"msg": f"Hello, {username}"}, 200
+        return f"Hello, {username}", 200
     else:
         return {"msg": f"Error"}, 400
 

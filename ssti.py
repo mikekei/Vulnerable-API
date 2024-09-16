@@ -9,7 +9,7 @@ def sstivuln():
     exp = request.form.get("mathexp", "test")
     test = Template("my temp: " + exp)
     if exp:
-        return {"msg": test.render()}, 200
+        return f"{test.render()}", 200
     else:
         return {"msg": f"Error"}, 400
 
