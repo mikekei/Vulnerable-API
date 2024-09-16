@@ -1,6 +1,6 @@
 import yaml
 
-def generate_replicas(swagger_path, output_path, num_replicas=1000):
+def generate_replicas(swagger_path, output_path, num_replicas=500):
     # Load the original swagger file
     with open(swagger_path, 'r') as file:
         swagger_data = yaml.safe_load(file)
